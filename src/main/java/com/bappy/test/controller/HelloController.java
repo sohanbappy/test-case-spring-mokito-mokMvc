@@ -14,12 +14,6 @@ public class HelloController {
     @Autowired
     UserService userService;
 
-
-    @GetMapping(path = "/hello")
-    public String hello() {
-        return "Hello!!";
-    }
-
     @GetMapping(path = "/allUsers")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
