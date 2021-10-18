@@ -21,14 +21,12 @@ public class HelloController {
     }
 
     @GetMapping(path = "/allUsers")
-    public TestResponse getAllUsers() {
-        List<User> allUsers = userService.getAllUsers();
-        return new TestResponse("All Retrieved", true);
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @PostMapping(path = "/addUser")
-    public TestResponse addUser(@RequestBody User userBody) {
-        User user = userService.saveUser(userBody);
-        return new TestResponse("Added", true);
+    public User addUser(@RequestBody User userBody) {
+        return userService.saveUser(userBody);
     }
 }
