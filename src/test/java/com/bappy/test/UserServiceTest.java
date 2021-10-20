@@ -28,8 +28,13 @@ public class UserServiceTest {
     void getUserByIdTest() throws Exception {
         User expectedUser = new User(500, "SB", "0166", "sb@gmail.com");
         UserService service = new UserService(userRepo);
+        //for Every dependency of UserService we need to Mock (for repositories)
         Mockito.when(userRepo.findById(500)).thenReturn(Optional.of(expectedUser));
+
         User actualUser = service.getUserById(500);
         Assertions.assertThat(actualUser.getId()).isEqualTo(expectedUser.getId());
+
+        //Checking How may times Repo calls
+        Mockito.verify(userRepo, Mockito.times(1)).findById(500);
     }
 }
