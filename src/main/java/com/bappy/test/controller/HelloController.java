@@ -1,6 +1,5 @@
 package com.bappy.test.controller;
 
-import com.bappy.test.entity.TestResponse;
 import com.bappy.test.entity.User;
 import com.bappy.test.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +10,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@RequestMapping("/api")
 public class HelloController {
 
     @Autowired
