@@ -43,8 +43,13 @@ public class SecurityTest {
         Mockito.when(userService.getAllUsers()).thenReturn(Arrays.asList(user1, user2));
 
 
+        //Get token from another API call - permitAll()
+        String token = "ejwfsbdfgdhgbfjbdfghkgj";//dummy
+
+
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/index")
-                .with(SecurityMockMvcRequestPostProcessors.user("sohan").roles("ADMIN", "USER")))
+                .with(SecurityMockMvcRequestPostProcessors.user("sohan").roles("ADMIN", "USER"))
+                .header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("msg"))
