@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -38,7 +39,9 @@ public class WebControllerTest {
         Mockito.when(userService.getAllUsers()).thenReturn(Arrays.asList(user1, user2));
 
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/index"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/index")
+                .with(SecurityMockMvcRequestPostProcessors.user("sohan").roles("ADMIN", "USER"))
+                .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("msg"))
