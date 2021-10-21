@@ -36,7 +36,7 @@ public class SecurityTest {
 
     @Test
     @DisplayName("Return Index View (Protected)")
-    public void getAllUsersTest() throws Exception {
+    public void getIndexWithSecurityTest() throws Exception {
         User user1 = new User(101, "sohan", "01766", "sohan@gmail.com");
         User user2 = new User(102, "bappy", "01866", "bappy@gmail.com");
 
@@ -49,6 +49,7 @@ public class SecurityTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/index")
                 .with(SecurityMockMvcRequestPostProcessors.user("sohan").roles("ADMIN", "USER"))
+                .with(SecurityMockMvcRequestPostProcessors.csrf())
                 .header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))

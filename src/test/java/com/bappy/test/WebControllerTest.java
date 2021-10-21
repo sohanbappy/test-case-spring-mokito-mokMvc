@@ -31,7 +31,7 @@ public class WebControllerTest {
 
     @Test
     @DisplayName("Return a View")
-    public void getAllUsersTest() throws Exception {
+    public void getIndexViewPageTest() throws Exception {
         User user1 = new User(101, "sohan", "01766", "sohan@gmail.com");
         User user2 = new User(102, "bappy", "01866", "bappy@gmail.com");
 
