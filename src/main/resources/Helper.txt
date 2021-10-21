@@ -1,0 +1,4 @@
+====Basic Test for Spring Boot (JUnit 5)====
+**Open Project
+**Import DB
+**Run all Test Cases

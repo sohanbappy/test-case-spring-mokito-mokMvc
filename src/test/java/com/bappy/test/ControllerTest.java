@@ -1,7 +1,6 @@
 package com.bappy.test;
 
 import com.bappy.test.controller.HelloController;
-import com.bappy.test.entity.TestResponse;
 import com.bappy.test.entity.User;
 
 import com.bappy.test.service.UserService;
