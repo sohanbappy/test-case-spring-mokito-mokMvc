@@ -6,11 +6,17 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.powermock.reflect.Whitebox;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 public class StaticPrivateMethodTest {
 
@@ -23,6 +29,9 @@ public class StaticPrivateMethodTest {
     }
 
 
+    /*
+    Private Method Testing
+     */
     @Test
     public void privateMethodTest() throws Exception {
         String actualResult = Whitebox.invokeMethod(converter, "getResult", 70);
@@ -49,5 +58,25 @@ public class StaticPrivateMethodTest {
         String expected = "Fail";
 
         Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    /*
+    Static Method Testing
+     */
+    @Test
+    void staticMethodTest() {
+        //Before mock
+        assertNotEquals(2345, Converter.stringToInt("1234"));
+
+        //Mocking (main)
+        try (MockedStatic mocked = mockStatic(Converter.class)) {
+            mocked.when(() -> Converter.stringToInt("1234")).thenReturn(1234);
+            //mocked.when(() -> Converter.stringToInt("1234")).thenReturn(3456);//fail-case
+
+            //Mocked behavior
+            assertEquals(1234, Converter.stringToInt("1234"));
+            //Verifying mocks
+            mocked.verify(times(1), () -> Converter.stringToInt("1234"));
+        }
     }
 }
