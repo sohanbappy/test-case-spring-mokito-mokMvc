@@ -2,7 +2,7 @@
 Test Driven Development(TDD) - Find out bugs before deploy in Production level is important. Isn't it?
 
 
-### Tes cases for Spring boot Applications
+### Test cases for Spring boot Applications
 --for Controller, Repository, Service, Security (if possible)
 
 ### Why JUnit test?
